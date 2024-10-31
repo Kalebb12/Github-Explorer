@@ -1,6 +1,24 @@
 import { FaGithubSquare } from "react-icons/fa";
 import SearchIcon from "../../svg/search";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "../../components/button";
+import { getUserinfo, getUserRepo } from "../../services/fetcher";
+import { useState } from "react";
 const Main = () => {
+  const [username, setUserName] = useState("")
+  const dispatch = useDispatch()
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    dispatch({type:"user/startFetch"})
+    const user = await getUserinfo(username)
+    const repo = await getUserRepo(username)
+    if(!user) return
+    dispatch({ type: "user/getUser", payload: {user,repo} })
+    console.log(user);
+    setUserName("") // Clear the input field after submission
+  }
+
+  const {isLoading} = useSelector(store=>store.user)
   return (
     <div className="flex flex-col gap-5 text-center h-[300px] bg-slate-800 text-[#f5f5f5] p-10 rounded-2xl">
       <FaGithubSquare size={80} className="mx-auto" />
@@ -9,15 +27,12 @@ const Main = () => {
         <span className="font-medium text-[18px]">
           Enter a GitHub username to view their profile and repositories
         </span>
-        <form className="flex items-center gap-3">
-          <label className="input input-bordered flex items-center gap-2 w-full">
-            <input type="text" className="w-full" placeholder="Search" />
+        <form className="flex items-center gap-3" onSubmit={handleSubmit}>
+          <label className="flex items-center w-full gap-2 input input-bordered">
+            <input type="text" required className="w-full" name="username" placeholder="Search" value={username} onChange={(e)=>setUserName(e.target.value)} />
             <SearchIcon />
           </label>
-          <button className="btn bg-blue-700 font-medium hover:bg-blue-800">
-            search
-            <SearchIcon />
-          </button>
+          <Button loading={isLoading}/>
         </form>
       </div>
     </div>
