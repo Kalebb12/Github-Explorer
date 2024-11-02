@@ -14,7 +14,6 @@ const Main = () => {
     const repo = await getUserRepo(username)
     if(!user) return
     dispatch({ type: "user/getUser", payload: {user,repo} })
-    console.log(user);
     setUserName("") // Clear the input field after submission
   }
 

@@ -3,7 +3,7 @@ import Main from "../features/main/main";
 
 const AppLayout = () => {
   return (
-    <main className="flex flex-col gap-4 justify-center items-center h-screen w-screen px-5">
+    <main className="flex flex-col items-center justify-center w-full gap-4 px-5 py-4 overflow-scroll">
       <Main/>
       <UserInfo/>
     </main>
