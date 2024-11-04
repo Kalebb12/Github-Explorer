@@ -1,23 +1,27 @@
 import { FaGithubSquare } from "react-icons/fa";
 import SearchIcon from "../../svg/search";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "../../components/button";
-import { getUserinfo, getUserRepo } from "../../services/fetcher";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Main = () => {
   const [username, setUserName] = useState("")
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const handleSubmit = async(e) => {
     e.preventDefault();
-    dispatch({type:"user/startFetch"})
-    const user = await getUserinfo(username)
-    const repo = await getUserRepo(username)
-    if(!user) return
-    dispatch({ type: "user/getUser", payload: {user,repo} })
+    // dispatch({type:"user/startFetch"})
+    // const user = await getUserinfo(username)
+    // const repo = await getUserRepo(username)
+    // if(!user) return
+    // dispatch({ type: "user/getUser", payload: {user,repo} })
+    setIsLoading(true)
     setUserName("") // Clear the input field after submission
+    setIsLoading(false)
+    return navigate("/user/"+username)
   }
 
-  const {isLoading} = useSelector(store=>store.user)
+  const [isLoading , setIsLoading] = useState(false)
+
   return (
     <div className="flex flex-col gap-5 text-center h-[300px] bg-slate-800 text-[#f5f5f5] p-10 rounded-2xl">
       <FaGithubSquare size={80} className="mx-auto" />
