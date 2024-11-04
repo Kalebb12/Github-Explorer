@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import User from "../../ui/user";
 import Repo from "../repo/repo";
 import { getUserinfo, getUserRepo } from "../../services/fetcher";
