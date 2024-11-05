@@ -2,7 +2,7 @@ import { FaGithub } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 const User = ({ user }) => {
   return (
-    <div className="bg-slate-800 flex gap-10 items-center w-full py-10 px-10 mx-auto text-[#f5f5f5] rounded-2xl">
+    <div className="bg-slate-800 flex md:flex-row flex-col items-start gap-10 md:items-center w-full py-10 px-10 mx-auto text-[#f5f5f5] rounded-2xl">
       <img
         src={user.avatar_url}
         alt={user.name + " profile"}
@@ -20,7 +20,7 @@ const User = ({ user }) => {
             <MdLocationOn /> {user.location || "No Location Provided"}
           </span>
           <a
-            className="flex items-center gap-1"
+            className="flex items-center gap-1 underline"
             href={user.html_url}
             target="_blank"
             rel="noopener noreferrer"

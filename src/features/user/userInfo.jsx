@@ -5,11 +5,11 @@ import { useLoaderData } from "react-router-dom";
 
 const UserInfo = () => {
   const { user, repo } = useLoaderData();
-  console.log(repo); 
+  console.log(repo);
   return (
     <section className="flex flex-col gap-3">
       <User user={user.data} />
-       {repo.data.slice(0) &&  <Repo repos={repo.data.slice(0, 9)} />}
+      <Repo repos={repo.data.slice(0, 9)} />
     </section>
   );
 };
